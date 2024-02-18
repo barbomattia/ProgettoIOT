@@ -2,9 +2,9 @@
 #include <VL53L0X.h>
 #include "spider_sense.h"
 
-#define VIBRATION_BUTTON_PIN P6_6 // Port 6, Pin 1
+#define VIBRATION_BUTTON_PIN P6_6 // Port 6, Pin 6
+#define BEEPER_PIN P6_7 // Port 6, Pin 7
 #define BUTTON_PIN P1_1
-VL53L0X sensor;
 
 //State Machine Declaration
 State_t cur_state = STATE_WAIT;
@@ -12,7 +12,7 @@ State_t cur_state = STATE_WAIT;
 void fn_StateWait(void);
 void fn_StateInitHeight(void);
 void fn_StateWork(void);
-void buttonPressed(void);
+void menageBeeper(int level);
 
 StateMachine_t StateMachine[] = {
 {STATE_WAIT, fn_StateWait},
@@ -22,7 +22,8 @@ StateMachine_t StateMachine[] = {
 
 void run(void);
 
-// derived information
+
+VL53L0X sensor;
 const unsigned sampling_intervall = 2000;
 double height = 1700;
 
@@ -31,7 +32,8 @@ void setup() {
     Wire.begin();
     sensor.init();
     sensor.setTimeout(500);  // Set timeout in ms (optional)
-    pinMode(VIBRATION_BUTTON_PIN, OUTPUT);
+    //pinMode(VIBRATION_BUTTON_PIN, OUTPUT);
+    pinMode(BEEPER_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
 
     // Set measurement timing budget to a higher value for long-range mode
@@ -134,9 +136,9 @@ void fn_StateWork(void){
     int level = defineLevel(distance);
     int impulse = pwmButton(level);
     Serial.print("level:"); Serial.print(level);
-    Serial.print("impulse:"); Serial.println(impulse);
+    Serial.print(" impulse:"); Serial.println(impulse);
     
-    analogWrite(VIBRATION_BUTTON_PIN, impulse);
+    menageBeeper(level);
       
     delay(500); // Wait for an half of second to take another misurementation
 }
@@ -148,4 +150,13 @@ void run(void){
   else{
     Serial.println("ERRORE");
   }
+}
+
+void menageBeeper(int level){
+  if(level == 0){
+    tone(BEEPER_PIN, 255, 100);
+  }else{
+    noTone(BEEPER_PIN);
+  }
+
 }

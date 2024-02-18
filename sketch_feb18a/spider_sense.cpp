@@ -19,13 +19,6 @@ int pwmButton(int level) {
     return impulse;
 }
 
-int pwmBeeper(int level) {
-    int impulse = 0;
-
-    if (level == 3) impulse = IMPULSE_TIME / DO4_FREQUENCY;
-    
-    return impulse;
-}
 
 double avarage2(double media_precedente, int n, int nuovo_valore){
     return ((media_precedente * n) + nuovo_valore) / (n + 1);
