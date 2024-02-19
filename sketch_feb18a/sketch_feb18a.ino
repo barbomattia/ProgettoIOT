@@ -2,7 +2,7 @@
 #include <VL53L0X.h>
 #include "spider_sense.h"
 
-#define VIBRATION_BUTTON_1_PIN P6_6 // Port 6, Pin 1
+#define VIBRATION_BUTTON_1_PIN P2_4 // Port 6, Pin 1
 #define VIBRATION_BUTTON_2_PIN P6_7 // Port 6, Pin 1
 #define BUTTON_PIN P1_1
 
@@ -30,6 +30,8 @@ StateMachine_t StateMachine[] = {
 
 void run(void);
 
+void OnOf();
+
 // derived information
 const unsigned sampling_intervall = 2000;
 double height = 1700;
@@ -48,6 +50,8 @@ void setup() {
     pinMode(VIBRATION_BUTTON_1_PIN, OUTPUT);
     pinMode(VIBRATION_BUTTON_2_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
+   
+    
 
     pinMode(SHT_LOX1, OUTPUT); pinMode(SHT_LOX2, OUTPUT); 
     digitalWrite(SHT_LOX1, LOW); digitalWrite(SHT_LOX2, LOW); 
@@ -63,15 +67,12 @@ void setup() {
       sensor0.setAddress(0x30);
       delay(100);
       Serial.print("Sensor 0 init with I2C adress (0x");
-      Serial.print ( sensor0.getAddress(), HEX);
-      Serial.println (")");
+      Serial.print( sensor0.getAddress(), HEX);
+      Serial.println(")");
     }else{
       Serial.println("Sensor Not Init");
     }
-
-    delay(100);
-    digitalWrite(SHT_LOX1,LOW);
-
+  
     delay(500);
 
     //power LOX2 and set adress
@@ -83,8 +84,8 @@ void setup() {
       sensor1.setAddress(0x32);
       delay(100);
       Serial.print("Sensor 1 init with I2C adress (0x");
-      Serial.print ( sensor1.getAddress(), HEX);
-      Serial.println (")");
+      Serial.print( sensor1.getAddress(), HEX);
+      Serial.println(")");
     }else{
       Serial.println("Sensor1 Not Init");
     }
@@ -107,6 +108,9 @@ void setup() {
     // Set the sensor to long-range mode
     sensor1.setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18); // 18 is the recommended value for long-range mode
     sensor1.setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14); // 14 is the recommended value for long-range mode
+
+    sensor0.startContinuous();
+    sensor1.startContinuous();
 
     delay(5000);
 }
@@ -132,8 +136,7 @@ void fn_StateWait(void){
 }
 
 void fn_StateInitHeight(void){
-  // Start continuous measurement
-  sensor0.startContinuous();
+  
   delay(100); // Allow time for measurement
   
   double arrayAvarage[10];
@@ -186,18 +189,13 @@ void fn_StateInitHeight(void){
   delay(1000);
   
   cur_state = STATE_WORK;
-  sensor0.stopContinuous();
-  
+    
 }
 
 void fn_StateWork(void){
   
-    Serial.println();
-    Serial.println();
-
-    /*
     Serial.print("Detect distance 0: ");
-    volatile uint16_t distance0 = sensor0.readRangeSingleMillimeters();
+    volatile uint16_t distance0 = sensor0.readRangeContinuousMillimeters();
     delay(100);
 
     if (sensor0.timeoutOccurred()){
@@ -217,12 +215,13 @@ void fn_StateWork(void){
       analogWrite(VIBRATION_BUTTON_1_PIN, impulse0);
     }
     
+    
     delay(1000);
-    */
+    
     
     Serial.println();
     Serial.print("Detect distance 1: ");
-    uint16_t distance1 = sensor1.readRangeSingleMillimeters();
+    uint16_t distance1 = sensor1.readRangeContinuousMillimeters();
     delay(100);
        
     if(sensor1.timeoutOccurred()) {
