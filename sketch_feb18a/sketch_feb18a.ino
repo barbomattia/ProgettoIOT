@@ -3,7 +3,7 @@
 #include "spider_sense.h"
 
 #define VIBRATION_BUTTON_1_PIN P2_4 // Port 6, Pin 1
-#define VIBRATION_BUTTON_2_PIN P6_7 // Port 6, Pin 1
+#define BEEPER_PIN P6_7 // Port 6, Pin 1
 #define BUTTON_PIN P1_1
 
 #define SHT_LOX1 P2_6
@@ -20,7 +20,7 @@ State_t cur_state = STATE_WAIT;
 void fn_StateWait(void);
 void fn_StateInitHeight(void);
 void fn_StateWork(void);
-void buttonPressed(void);
+void menageBeeper(int level);
 
 StateMachine_t StateMachine[] = {
 {STATE_WAIT, fn_StateWait},
@@ -29,8 +29,6 @@ StateMachine_t StateMachine[] = {
 } ;
 
 void run(void);
-
-void OnOf();
 
 // derived information
 const unsigned sampling_intervall = 2000;
@@ -48,7 +46,7 @@ void setup() {
     Wire.begin();
 
     pinMode(VIBRATION_BUTTON_1_PIN, OUTPUT);
-    pinMode(VIBRATION_BUTTON_2_PIN, OUTPUT);
+    pinMode(BEEPER_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
    
     
@@ -212,7 +210,7 @@ void fn_StateWork(void){
       Serial.print("level 0:"); Serial.println(level0);
       Serial.print("impulse 0:"); Serial.println(impulse0);
       
-      analogWrite(VIBRATION_BUTTON_1_PIN, impulse0);
+      menageBeeper(level0);
     }
     
     
@@ -250,4 +248,13 @@ void run(void){
   else{
     Serial.println("ERRORE");
   }
+}
+
+void menageBeeper(int level){
+  if(level == 0){
+    tone(BEEPER_PIN, 255, 100);
+  }else{
+    noTone(BEEPER_PIN);
+  }
+
 }
