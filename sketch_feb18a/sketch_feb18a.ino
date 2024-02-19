@@ -49,8 +49,6 @@ void setup() {
     pinMode(BEEPER_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
    
-    
-
     pinMode(SHT_LOX1, OUTPUT); pinMode(SHT_LOX2, OUTPUT); 
     digitalWrite(SHT_LOX1, LOW); digitalWrite(SHT_LOX2, LOW); 
 
@@ -139,7 +137,7 @@ void fn_StateInitHeight(void){
   
   double arrayAvarage[10];
 
-  for(int i=0; i<2; i++){
+  for(int i=0; i<5; i++){
     unsigned long startTime = millis();
     bool endTimer = false;
     double avarage = 1700;      //start value of the avarage
@@ -165,7 +163,7 @@ void fn_StateInitHeight(void){
         Serial.print(" distance: "); Serial.println(distance);
   
         // calculate the avrage of the iteration 
-        avarage = avarage2(avarage, count, distance);
+        avarage = avarage2(avarage, count, (double)distance);
         count++;
         
         if(millis() - startTime >= sampling_intervall){
@@ -236,7 +234,7 @@ void fn_StateWork(void){
       Serial.print("level 1:"); Serial.println(level1);
       Serial.print("impulse 1:"); Serial.println(impulse1);
       
-      analogWrite(VIBRATION_BUTTON_2_PIN, impulse1);
+      analogWrite(VIBRATION_BUTTON_1_PIN, impulse1);
     }
       
 }
