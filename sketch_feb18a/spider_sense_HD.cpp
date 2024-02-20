@@ -44,6 +44,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 
     
     // lidar 1 addressing procedure
+    /*
     delay(500);
     digitalWrite(LIDAR0,HIGH);  // turn on the first lidar
     delay(100);
@@ -60,6 +61,8 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       Serial.println("Sensor 0 Not Init");
       initialized_sensors[0] = false;
     }
+    */
+    initialized_sensors[0] = false;
     
     
     // lidar 1 addressing procedure
@@ -69,7 +72,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
     
     if(array[1].init()){
       delay(100);
-      array[1].setAddress(0x08);   // set the address of the first lidar
+      array[1].setAddress(0x39);   // set the address of the first lidar
       delay(100);
       Serial.print("Sensor 1 Right Front init with I2C adress (0x");
       Serial.print( array[1].getAddress(), HEX);
@@ -79,6 +82,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       Serial.println("Sensor 1 Not Init");
       initialized_sensors[1] = false;
     }
+    
 
 
     // lidar 2 addressing procedure
@@ -180,11 +184,13 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
     // Set measurement timing budget to a higher value for long-range mode
     for(int i = 0; i<7; i++){
       array[i].setTimeout(50);
-      array[i].setMeasurementTimingBudget(66000);
+      array[i].setMeasurementTimingBudget(33000);
 
       // Set the sensor to long-range mode
       array[i].setVcselPulsePeriod(VL53L0X::VcselPeriodPreRange, 18); // 18 is the recommended value for long-range mode
       array[i].setVcselPulsePeriod(VL53L0X::VcselPeriodFinalRange, 14); // 14 is the recommended value for long-range mode
+
+      array[i].setSignalRateLimit(0.1);
 
       array[i].startContinuous(); 
 
@@ -204,7 +210,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 double samplingHeight(VL53L0X& sensor_height){
   
   uint16_t distance = sensor_height.readRangeContinuousMillimeters();
-  delay(100);     // Wait for 40 milliseconds to enable the sensor to take a misurement
+  delay(40);     // Wait for 40 milliseconds to enable the sensor to take a misurementation 
 
   if (sensor_height.timeoutOccurred()) {
     Serial.println("TIMEOUT sensor");
@@ -220,27 +226,6 @@ double samplingHeight(VL53L0X& sensor_height){
   }
 
   return (double)distance;    
-}
-
-double readHeight1(VL53L0X& sensor_height){
-  Serial.println();
-  Serial.print("Detect Height: ");
-  uint16_t distance = sensor_height.readRangeContinuousMillimeters();
-  delay(100);
-     
-  if(sensor_height.timeoutOccurred()) {
-    Serial.print(" TIMEOUT sensor height ");
-    distance = 3000;
-  }
-  
-  // Check for sensor communication errors
-  if(distance == 0xFFFF) { 
-    Serial.print(" Error in the reading of the lidar height sensor "); 
-    distance = 3000;
-  }else{
-    Serial.println(distance);        
-  }
-  return distance;
 }
 
 
@@ -326,13 +311,28 @@ void vibrateButton(int i, double intensity){
 }
 
 
-void soundBeeper(int level){
-  if(level == 0){
-    Serial.println("Sound on the beeper");
-    tone(BEEPER, 255, 100);
+void soundBeeper(int measured_height, int standard_height ){
+  Serial.print("measured height: "); Serial.println(measured_height);
+  Serial.print("standard height: "); Serial.println(standard_height); 
+  if(measured_height > standard_height + 60){
+    Serial.println("Sound on the beeper: HOLE");
+    tone(BEEPER, 5, 700);
   }else{
-    noTone(BEEPER);
+    if(measured_height < (standard_height - 100 ) ){
+      if(measured_height > (standard_height - 300 ) ){
+        Serial.println("Sound on the beeper: STEP");
+        tone(BEEPER, 10, 700);
+      }else{
+        Serial.println("Sound on the beeper: HIGHER OBSTACLE");
+        tone(BEEPER, 500 , 700);
+      }
+    }else{
+        Serial.println("No height ostacle" );
+        noTone(BEEPER);
+    }
+    
   }
+  
 }
 
 void shotDownAllBotton(){

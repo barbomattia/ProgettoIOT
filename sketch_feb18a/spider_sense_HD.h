@@ -29,7 +29,7 @@ double readHeight(VL53L0X& sensor_height);
 double readDistance(VL53L0X& sensor);
 
 void vibrateButton(int i, double intensity);
-void soundBeeper(int level);
+void soundBeeper(int measured_height, int standard_height );
 double readHeight1(VL53L0X& sensor_height);
 
 
