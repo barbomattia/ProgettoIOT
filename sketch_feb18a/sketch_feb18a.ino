@@ -96,24 +96,32 @@ void fn_StateInitHeight(void){
       avarage = 1700;           //start value of the avarage
       count = 1;
     
-      while(!endTimer){
-  
-          Serial.print(" count: ");     Serial.print(count);
-          distance = samplingHeight(array_of_sensors[6]);   
-          delay(40);
-          if(distance >= 0 ){ avarage = avarage2(avarage, count, distance); }   // calculate the avrage of the iteration 
-      
-          count++;
-          
-          if(millis() - startTime >= sampling_intervall){
+      while (!endTimer) {
+        Serial.print(" count: ");
+        Serial.print(count);
+        distance = samplingHeight(array_of_sensors[6]);
+        delay(40);
+        if (distance < 0 || distance > 2000) {
+            Serial.println("fuori range");
+        } else {
+            avarage = avarage2(avarage, count, distance); // calcola la media dell'iterazione
+            count++;
+        }
+    
+        if (millis() - startTime >= sampling_intervall) {
             endTimer = true;
-            Serial.print("Endint sampling number: ");   Serial.print(i);
-            Serial.print(" with avarage:");             Serial.println(avarage);
-            arrayAvarage[i] = avarage;      // save the avarage of the sampling
-          }
+            Serial.print("Endint sampling number: ");
+            Serial.print(i);
+            Serial.print(" with avarage:");
+            Serial.println(avarage);
+            Serial.print(" count:");
+            Serial.println(count);
+            arrayAvarage[i] = avarage; // salva la media del campionamento
+        }
     
         delay(100);
-      }       
+      }
+      
     }
   }
   
