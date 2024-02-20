@@ -49,7 +49,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       delay(100);
       array[0].setAddress(0x29);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 0 init with I2C adress (0x");
+      Serial.print("Sensor 0 Front init with I2C adress (0x");
       Serial.print( array[0].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[0] = true;
@@ -68,7 +68,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       delay(100);
       array[1].setAddress(0x30);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 1 init with I2C adress (0x");
+      Serial.print("Sensor 1 Right Front init with I2C adress (0x");
       Serial.print( array[1].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[1] = true;
@@ -87,7 +87,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       delay(100);
       array[2].setAddress(0x31);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 2 init with I2C adress (0x");
+      Serial.print("Sensor 2 Right Back init with I2C adress (0x");
       Serial.print( array[2].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[2] = true;
@@ -106,7 +106,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       delay(100);
       array[3].setAddress(0x32);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 3 init with I2C adress (0x");
+      Serial.print("Sensor 3 Back init with I2C adress (0x");
       Serial.print( array[3].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[3] = true;
@@ -125,7 +125,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
       delay(100);
       array[4].setAddress(0x33);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 4 init with I2C adress (0x");
+      Serial.print("Sensor 4 Left Back init with I2C adress (0x");
       Serial.print( array[4].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[4] = true;
@@ -142,9 +142,9 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 
     if(array[5].init()){
       delay(100);
-      array[5].setAddress(0x33);   // set the address of the first lidar
+      array[5].setAddress(0x34);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 5 init with I2C adress (0x");
+      Serial.print("Sensor 5 Left Front init with I2C adress (0x");
       Serial.print( array[5].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[5] = true;
@@ -161,9 +161,9 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 
     if(array[6].init()){
       delay(100);
-      array[6].setAddress(0x34);   // set the address of the first lidar
+      array[6].setAddress(0x35);   // set the address of the first lidar
       delay(100);
-      Serial.print("Sensor 6 height init with I2C adress (0x");
+      Serial.print("Sensor 6 Height init with I2C adress (0x");
       Serial.print( array[6].getAddress(), HEX);
       Serial.println(")");
       initialized_sensors[6] = true;

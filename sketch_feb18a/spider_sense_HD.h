@@ -4,23 +4,23 @@
 #include <VL53L0X.h>
 #include <stdio.h>
 
-#define VIBRATION_BUTTON_0 P2_4  // vibration button 0
-#define VIBRATION_BUTTON_1 P6_7  // vibration button 1
-#define VIBRATION_BUTTON_2 P2_4  // vibration button 2
-#define VIBRATION_BUTTON_3 P6_7  // vibration button 3
-#define VIBRATION_BUTTON_4 P2_4  // vibration button 4
-#define VIBRATION_BUTTON_5 P6_7  // vibration button 5
-#define BEEPER P6_7              // beeper
+#define VIBRATION_BUTTON_0 P2_5  // vibration button 0 - a
+#define VIBRATION_BUTTON_1 P5_7  // vibration button 1 - b
+#define VIBRATION_BUTTON_2 P2_4  // vibration button 2 - c
+#define VIBRATION_BUTTON_3 P5_6  // vibration button 3 - d
+#define VIBRATION_BUTTON_4 P3_0  // vibration button 4 - e
+#define VIBRATION_BUTTON_5 P2_6  // vibration button 5 - f
+#define BEEPER P2_7              // beeper - g
 
 #define BUTTON_PIN P1_1              // start button
 
-#define LIDAR0 P2_6                // lidar sensor 0
-#define LIDAR1 P2_7                // lidar sensor 1
-#define LIDAR2 P2_7                // lidar sensor 2
-#define LIDAR3 P2_7                // lidar sensor 3
-#define LIDAR4 P2_7                // lidar sensor 4
-#define LIDAR5 P2_7                // lidar sensor 5
-#define LIDAR_HEIGHT P2_7          // lidar sensor 6 - Height
+#define LIDAR0 P6_1                // lidar sensor 0 - front
+#define LIDAR1 P3_2                // lidar sensor 1 - right front
+#define LIDAR2 P4_0                // lidar sensor 2 - right back
+#define LIDAR3 P4_2                // lidar sensor 3 - back
+#define LIDAR4 P4_1                // lidar sensor 4 - left back
+#define LIDAR5 P3_3                // lidar sensor 5 - left front
+#define LIDAR_HEIGHT P6_0          // lidar sensor 6 - Height
 
 
 void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]);
