@@ -22,6 +22,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
     
     // button pin
     pinMode(BUTTON_PIN, INPUT_PULLUP);
+       
     
     // lidar sensor & beeper
     pinMode(LIDAR0, OUTPUT); 
@@ -203,7 +204,6 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
     Serial.println(" )");
 
     delay(1000);
-
 }
 
 
@@ -276,37 +276,37 @@ void vibrateButton(int i, double intensity){
   switch (i) {
     case 0:
       Serial.print("Vibration button 0, with intensity: "); Serial.println(intensity);
-      shotDownAllBotton();
+      //shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_0, intensity);
       break;
     case 1:
       Serial.print("Vibration button 1, with intensity: "); Serial.println(intensity);
-      shotDownAllBotton();
+      //shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_1, intensity);
       break;
     case 2:
       Serial.print("Vibration button 2, with intensity: "); Serial.println(intensity);
-      shotDownAllBotton();
+      //shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_2, intensity);
       break;
     case 3:
       Serial.print("Vibration button 3, with intensity: "); Serial.println(intensity);
-      shotDownAllBotton();
+      //shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_3, intensity);
       break;
     case 4:
       Serial.print("Vibration button 4, with intensity: "); Serial.println(intensity);
-      shotDownAllBotton();
+      //shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_4, intensity);
       break;
     case 5:
       Serial.print("Vibration button 5, with intensity: "); Serial.println(intensity);
-      shotDownAllBotton();
+      //shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_5, intensity);
       break;
     default:
       Serial.print("ERROR in the vibration Error");    
-      shotDownAllBotton();  
+      //shotDownAllBotton();  
   }
 }
 

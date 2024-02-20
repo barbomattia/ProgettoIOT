@@ -54,8 +54,11 @@ void setup() {
     
     Wire.begin();
     initSpiderSense(array_of_sensors, initialized_sensors);
-    
+    attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), BUTTON1_ISR, FALLING); // Attiva l'interrupt sul pin 2
+
     Serial.println("///////////////// END SETUP /////////////////");
+    Serial.print("Waiting");
+
 }
 
 void loop() {
@@ -67,16 +70,8 @@ void loop() {
 
 // STATE MACHINE IMPLEMENTATION FUNCTIONS
 void fn_StateWait(void){
-  Serial.println("waiting");
-  
-  // Leggi lo stato del pulsante
-  int buttonState = digitalRead(BUTTON_PIN);
-  
-  // Se il pulsante è premuto, cambia lo stato
-  if (buttonState == LOW) {
-    Serial.println("Transitioning to State Height...");
-    cur_state = STATE_INIT_HEIGHT;
-  }
+  Serial.print(".");
+  delay(5000);
 }
 
 
@@ -162,3 +157,13 @@ void run(void){
     Serial.println("ERRORE");
   }
 }
+
+void BUTTON1_ISR() {
+  Serial.println("Transitioning to State Height...");
+  cur_state = STATE_INIT_HEIGHT;
+}
+
+/**
+* Source code:
+* https://www.italiantechproject.it/tutorial-arduino/sleep-mode-e-interrupt
+*/

@@ -15,7 +15,7 @@ typedef struct{
 } StateMachine_t;
 
 
-extern int defineLevel(int distance);   // the function take in input the distance detected by lidar and return a corrisponding level
+int defineLevel(int distance);   // the function take in input the distance detected by lidar and return a corrisponding level
 int pwmButton(int level);               // the function return an impulse for the buttons based on the level
 int pwmBeeper(int level);               // the function return an impulse for the beeper based on the level
 
