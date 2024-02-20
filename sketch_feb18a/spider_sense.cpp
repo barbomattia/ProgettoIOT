@@ -1,5 +1,4 @@
 #include "spider_sense.h"
-#include <Wire.h>
 #include <stdio.h>
 
 #define IMPULSE_TIME 255      // Max duretion of an impulse 
@@ -20,11 +19,15 @@ int pwmButton(int level) {
 }
 
 
-double avarage2(double media_precedente, int n, int nuovo_valore){
-    return ((media_precedente * n) + nuovo_valore) / (n + 1);
+double average2(double media_precedente, int n, double nuovo_valore){
+    if(nuovo_valore >= 0 && nuovo_valore <= 2000){
+      return ((media_precedente * n) + nuovo_valore) / (n + 1);
+    } else {
+      return -1;
+    }
 }
 
-double media1(double *arr, int size) {
+double average1(double *arr, int size) {
     double sum = 0;
     for(int i = 0; i < size; i++) {
         sum += arr[i];
@@ -32,7 +35,7 @@ double media1(double *arr, int size) {
     return sum / size;
 }
 
-double deviazione_standard(double *arr, int size, double media) {
+double standard_deviation(double *arr, int size, double media) {
     double sum = 0;
     for(int i = 0; i < size; i++) {
         sum += pow(arr[i] - media, 2);
@@ -41,8 +44,8 @@ double deviazione_standard(double *arr, int size, double media) {
 }
 
 double deriveHeight(double *arr, int size) {
-    double m = media1(arr, size);
-    double ds = deviazione_standard(arr, size, m);
+    double m = average1(arr, size);
+    double ds = standard_deviation(arr, size, m);
 
     double sum = 0;
     int count = 0;

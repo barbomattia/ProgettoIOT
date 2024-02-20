@@ -16,10 +16,13 @@ typedef struct{
 
 
 extern int defineLevel(int distance);   // the function take in input the distance detected by lidar and return a corrisponding level
-int pwmButton(int level);           // the function return an impulse for the buttons based on the level
-int pwmBeeper(int level);           // the function return an impulse for the beeper based on the level
+int pwmButton(int level);               // the function return an impulse for the buttons based on the level
+int pwmBeeper(int level);               // the function return an impulse for the beeper based on the level
 
-double avarage2(double media_precedente, int n, int nuovo_valore);
+double standard_deviation(double *arr, int size, double media);
+double average2(double media_precedente, int n, double nuovo_valore);
+double average1(double *arr, int size);
 double deriveHeight(double *arr, int size);
+
 
 #endif 
