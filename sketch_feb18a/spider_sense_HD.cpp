@@ -164,7 +164,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 
     if(array[6].init()){
       delay(100);
-      array[6].setAddress(0x1A);   // set the address of the first lidar
+      array[6].setAddress(0x35);   // set the address of the first lidar
       delay(100);
       Serial.print("Sensor 6 Height init with I2C adress (0x");
       Serial.print( array[6].getAddress(), HEX);
@@ -204,7 +204,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 double samplingHeight(VL53L0X& sensor_height){
   
   uint16_t distance = sensor_height.readRangeContinuousMillimeters();
-  delay(40);     // Wait for 40 milliseconds to enable the sensor to take a misurementation 
+  delay(100);     // Wait for 40 milliseconds to enable the sensor to take a misurement
 
   if (sensor_height.timeoutOccurred()) {
     Serial.println("TIMEOUT sensor");
@@ -220,6 +220,27 @@ double samplingHeight(VL53L0X& sensor_height){
   }
 
   return (double)distance;    
+}
+
+double readHeight1(VL53L0X& sensor_height){
+  Serial.println();
+  Serial.print("Detect Height: ");
+  uint16_t distance = sensor_height.readRangeContinuousMillimeters();
+  delay(100);
+     
+  if(sensor_height.timeoutOccurred()) {
+    Serial.print(" TIMEOUT sensor height ");
+    distance = 3000;
+  }
+  
+  // Check for sensor communication errors
+  if(distance == 0xFFFF) { 
+    Serial.print(" Error in the reading of the lidar height sensor "); 
+    distance = 3000;
+  }else{
+    Serial.println(distance);        
+  }
+  return distance;
 }
 
 
@@ -315,7 +336,7 @@ void soundBeeper(int level){
 }
 
 void shotDownAllBotton(){
-  digitalWrite(VIBRATION_BUTTON_0, 0); digitalWrite(VIBRATION_BUTTON_0, 0); digitalWrite(VIBRATION_BUTTON_2, 0);
+  digitalWrite(VIBRATION_BUTTON_0, 0); digitalWrite(VIBRATION_BUTTON_1, 0); digitalWrite(VIBRATION_BUTTON_2, 0);
   digitalWrite(VIBRATION_BUTTON_3, 0); digitalWrite(VIBRATION_BUTTON_4, 0); digitalWrite(VIBRATION_BUTTON_5, 0);
    
 }

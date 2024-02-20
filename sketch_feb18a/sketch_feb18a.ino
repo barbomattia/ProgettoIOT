@@ -99,7 +99,8 @@ void fn_StateInitHeight(void){
       while(!endTimer){
   
           Serial.print(" count: ");     Serial.print(count);
-          distance = samplingHeight(sensor_height);   
+          distance = samplingHeight(array_of_sensors[6]);   
+          delay(40);
           if(distance >= 0 ){ avarage = avarage2(avarage, count, distance); }   // calculate the avrage of the iteration 
       
           count++;
@@ -132,7 +133,7 @@ void fn_StateWork(void){
 
     // pooling of the distance from the lateral sensors
     for(int i =0; i<6; i++){
-      Serial.print("Sensor "); Serial.print(level); Serial.print(" -> ");
+      Serial.print("Sensor "); Serial.print(i); Serial.print(" -> ");
       distance = readDistance(array_of_sensors[i]);
       level = defineLevel(distance);  impulse = pwmButton(level);
       Serial.print("level :"); Serial.println(level);
@@ -147,9 +148,7 @@ void fn_StateWork(void){
     distance = readHeight(array_of_sensors[6]);
     level = defineLevel(distance);
     soundBeeper(level);
-     
 }
-
 
 void run(void){
   if(cur_state < STATE_NUM){

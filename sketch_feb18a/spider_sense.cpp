@@ -19,7 +19,7 @@ int pwmButton(int level) {
 }
 
 
-double avarage2(double media_precedente, int n, int nuovo_valore){
+double avarage2(double media_precedente, int n, double nuovo_valore){
     return ((media_precedente * n) + nuovo_valore) / (n + 1);
 }
 
