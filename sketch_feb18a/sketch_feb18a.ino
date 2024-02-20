@@ -132,12 +132,13 @@ void fn_StateWork(void){
 
     // pooling of the distance from the lateral sensors
     for(int i =0; i<6; i++){
+      Serial.print("Sensor "); Serial.print(level); Serial.print(" -> ");
       distance = readDistance(array_of_sensors[i]);
       level = defineLevel(distance);  impulse = pwmButton(level);
       Serial.print("level :"); Serial.println(level);
       Serial.print("impulse :"); Serial.println(impulse);
 
-      vibrateButton(i, level);
+      vibrateButton(i, impulse);
 
       delay(1000);
     }

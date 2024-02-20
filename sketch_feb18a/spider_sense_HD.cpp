@@ -1,7 +1,10 @@
 #include "spider_sense_HD.h"
 #include <VL53L0X.h>
+#include <Wire.h>
 #include <stdio.h>
 #include "spider_sense.h"
+
+void shotDownAllBotton();
 
 void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
     
@@ -47,7 +50,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 
     if(array[0].init()){
       delay(100);
-      array[0].setAddress(0x29);   // set the address of the first lidar
+      array[0].setAddress(0x30);   // set the address of the first lidar
       delay(100);
       Serial.print("Sensor 0 Front init with I2C adress (0x");
       Serial.print( array[0].getAddress(), HEX);
@@ -63,10 +66,10 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
     delay(500);
     digitalWrite(LIDAR1,HIGH);  // turn on the first lidar
     delay(100);
-
+    
     if(array[1].init()){
       delay(100);
-      array[1].setAddress(0x30);   // set the address of the first lidar
+      array[1].setAddress(0x08);   // set the address of the first lidar
       delay(100);
       Serial.print("Sensor 1 Right Front init with I2C adress (0x");
       Serial.print( array[1].getAddress(), HEX);
@@ -161,7 +164,7 @@ void initSpiderSense(VL53L0X (&array)[7], bool (&initialized_sensors)[7]){
 
     if(array[6].init()){
       delay(100);
-      array[6].setAddress(0x35);   // set the address of the first lidar
+      array[6].setAddress(0x1A);   // set the address of the first lidar
       delay(100);
       Serial.print("Sensor 6 Height init with I2C adress (0x");
       Serial.print( array[6].getAddress(), HEX);
@@ -243,7 +246,6 @@ double readHeight(VL53L0X& sensor_height){
 
 
 double readDistance(VL53L0X& sensor){
-  Serial.println();
   Serial.print("Detect distance: ");
   uint16_t distance = sensor.readRangeContinuousMillimeters();
   delay(100);
@@ -267,31 +269,38 @@ double readDistance(VL53L0X& sensor){
 void vibrateButton(int i, double intensity){
   switch (i) {
     case 0:
-      Serial.println("Vibration button 0");
+      Serial.print("Vibration button 0, with intensity: "); Serial.println(intensity);
+      shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_0, intensity);
       break;
     case 1:
-      Serial.println("Vibration button 1");
+      Serial.print("Vibration button 1, with intensity: "); Serial.println(intensity);
+      shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_1, intensity);
       break;
     case 2:
-      Serial.println("Vibration button 2");
+      Serial.print("Vibration button 2, with intensity: "); Serial.println(intensity);
+      shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_2, intensity);
       break;
     case 3:
-      Serial.println("Vibration button 3");
+      Serial.print("Vibration button 3, with intensity: "); Serial.println(intensity);
+      shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_3, intensity);
       break;
     case 4:
-      Serial.println("Vibration button 4");
+      Serial.print("Vibration button 4, with intensity: "); Serial.println(intensity);
+      shotDownAllBotton();
       analogWrite(VIBRATION_BUTTON_4, intensity);
       break;
     case 5:
-      Serial.println("Vibration button 5");
-      analogWrite(VIBRATION_BUTTON_4, intensity);
+      Serial.print("Vibration button 5, with intensity: "); Serial.println(intensity);
+      shotDownAllBotton();
+      analogWrite(VIBRATION_BUTTON_5, intensity);
       break;
     default:
-      Serial.println("ERROR in the vibration Error");      
+      Serial.print("ERROR in the vibration Error");    
+      shotDownAllBotton();  
   }
 }
 
@@ -303,4 +312,10 @@ void soundBeeper(int level){
   }else{
     noTone(BEEPER);
   }
+}
+
+void shotDownAllBotton(){
+  digitalWrite(VIBRATION_BUTTON_0, 0); digitalWrite(VIBRATION_BUTTON_0, 0); digitalWrite(VIBRATION_BUTTON_2, 0);
+  digitalWrite(VIBRATION_BUTTON_3, 0); digitalWrite(VIBRATION_BUTTON_4, 0); digitalWrite(VIBRATION_BUTTON_5, 0);
+   
 }
