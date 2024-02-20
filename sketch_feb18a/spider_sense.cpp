@@ -1,5 +1,4 @@
 #include "spider_sense.h"
-#include <Wire.h>
 #include <stdio.h>
 
 #define IMPULSE_TIME 255      // Max duretion of an impulse 
