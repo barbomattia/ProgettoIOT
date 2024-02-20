@@ -91,7 +91,7 @@ void fn_StateInitHeight(void){
     double avarage;             double distance;
     int count;
     
-    for(int i=0; i<5; i++){
+    for(int i=0; i<10; i++){
       startTime = millis();     endTimer = false;
       avarage = 1700;           //start value of the avarage
       count = 1;
@@ -118,6 +118,11 @@ void fn_StateInitHeight(void){
   }
   
   delay(100); 
+
+  Serial.println("Array Avarage:");
+  for(int i=0; i<10; i++){
+    Serial.print(i); Serial.print(": "); Serial.println(arrayAvarage[i]); 
+  }
  
   height = deriveHeight(arrayAvarage, 10);
   delay(100);
