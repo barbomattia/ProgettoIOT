@@ -1,5 +1,4 @@
 #include "spider_sense.h"
-#include <Wire.h>
 #include <stdio.h>
 
 #define IMPULSE_TIME 255      // Max duretion of an impulse 
@@ -20,8 +19,12 @@ int pwmButton(int level) {
 }
 
 
-double avarage2(double media_precedente, int n, int nuovo_valore){
-    return ((media_precedente * n) + nuovo_valore) / (n + 1);
+double avarage2(double media_precedente, int n, double nuovo_valore){
+    if(nuovo_valore >= 0 && nuovo_valore <= 2000){
+      return ((media_precedente * n) + nuovo_valore) / (n + 1);
+    } else {
+      return -1;
+    }
 }
 
 double media1(double *arr, int size) {
