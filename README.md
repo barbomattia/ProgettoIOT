@@ -29,10 +29,30 @@ The device operates with the following functionalities:
 The project's source code is meticulously organized into logical components and modules, ensuring maintainability and clarity.
 
 ### Source Code Organization:
-- `src/`: Contains the source code files.
-- `include/`: Houses header files.
-- `lib/`: Hosts external libraries utilized in the project.
-- `docs/`: Houses documentation files.
+- `project/`: Contains the source code files.
+- `test/`: Houses test files.
+- `images/`: Hosts images utilized in the Readme.md file.
+
+```
+
+├── project
+│   ├── project.ino               # Main code
+│   ├── spider_sense.cpp          # Hardware independent library implementation code
+│   ├── spider_sense.h            # Hardware independent library header file
+│   ├── spider_sense_HD.cpp       # Hardware dependent library implementation code
+│   └── spider_sense_HD.h         # Hardware dependent library header file
+└── test
+    ├── lidar_test                # Hardare dependent code to test the lidars
+    |   └── lidar_test.ino        # Test code
+    ├── vib_button_test           # Hardare dependent code to test the vibration buttons and the piezobuzzer
+    │   ├── spider_sense.cpp      # Hardware independent library implementation code
+    │   ├── spider_sense.h        # Hardware independent library header file
+    │   ├── spider_sense_HD.cpp   # Hardware dependent library implementation code
+    │   └── spider_sense_HD.h     # Hardware dependent library header file
+    |   └── vib_button_test.ino   # Test code
+    └── library_test.cpp          # Hardware independent library test code
+
+```
 
 ## Build and Deployment
 1. Install [Energia IDE](https://energia.nu/download/) and [MSP432PXX Drivers](https://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSP-EXP432P401R/latest/index_FDS.html).
