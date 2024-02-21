@@ -77,18 +77,21 @@ void fn_StateWait(void){
 
 void fn_StateInitHeight(void){
 
-  double arrayAvarage[10];
+  /**
+   * @brief Array to store the average values.
+   */
+  double arrayAverage[10];
 
   if(initialized_sensors[6] == 0){
     Serial.println("Sensor 6 for heigt is not initialized, skip the initialization of hight");  
   }else{     
     unsigned long startTime;    bool endTimer;
-    double avarage;             double distance;
+    double average;             double distance;
     int count;
     
     for(int i=0; i<10; i++){
       startTime = millis();     endTimer = false;
-      avarage = 600;           //start value of the avarage
+      average = 600;           //start value of the average
       count = 1;
     
       while(!endTimer){
@@ -96,15 +99,15 @@ void fn_StateInitHeight(void){
           Serial.print(" count: ");     Serial.print(count);
           distance = samplingHeight(array_of_sensors[6]);   
           delay(40);
-          if(distance >= 0 ){ avarage = avarage2(avarage, count, distance); }   // calculate the avrage of the iteration 
+          if(distance >= 0 ){ average = average2(average, count, distance); }   // calculate the avrage of the iteration 
       
           count++;
           
           if(millis() - startTime >= sampling_intervall){
             endTimer = true;
             Serial.print("Endint sampling number: ");   Serial.print(i);
-            Serial.print(" with avarage:");             Serial.println(avarage);
-            arrayAvarage[i] = avarage;      // save the avarage of the sampling
+            Serial.print(" with average:");             Serial.println(average);
+            arrayAverage[i] = average;      // save the average of the sampling
           }
     
         delay(100);
@@ -114,12 +117,12 @@ void fn_StateInitHeight(void){
   
   delay(100); 
 
-  Serial.println("Array Avarage:");
+  Serial.println("Array Average:");
   for(int i=0; i<10; i++){
-    Serial.print(i); Serial.print(": "); Serial.println(arrayAvarage[i]); 
+    Serial.print(i); Serial.print(": "); Serial.println(arrayAverage[i]); 
   }
  
-  height = deriveHeight(arrayAvarage, 10);
+  height = deriveHeight(arrayAverage, 10);
   delay(100);
   
   Serial.print("Derived Height: ");   Serial.println(height);

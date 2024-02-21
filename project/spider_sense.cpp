@@ -35,10 +35,10 @@ double average1(double *arr, int size) {
     return sum / size;
 }
 
-double standard_deviation(double *arr, int size, double media) {
+double standard_deviation(double *arr, int size, double average) {
     double sum = 0;
     for(int i = 0; i < size; i++) {
-        sum += pow(arr[i] - media, 2);
+        sum += pow(arr[i] - average, 2);
     }
     return sqrt(sum / size);
 }
