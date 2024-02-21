@@ -1,3 +1,0 @@
-I2C Porte
-6.5 -> SCL
-6.4 -> SDA
