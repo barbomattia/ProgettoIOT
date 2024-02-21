@@ -3,9 +3,9 @@
 This project leverages an embedded system device based on the MSP432P401R Launchpad microcontroller board. The device seamlessly integrates 7 VL53L0X Time-of-Flight (ToF) sensors, connected via I2C, along with 6 5V vibration motors, and 1 piezobuzzer. Designed to be mounted on a cap, the device's architecture includes the board atop, the piezobuzzer positioned at the front, and vibration motors evenly distributed along the cap's inner circumference. Furthermore, 6 lidars are strategically placed over the vibration buttons, while one lidar faces downwards at the front of the hat.
 
 <p align="center">
-   <img src="./images/lateral_view.png" width="500px">
-   <img src="./images/back_view.png" width="400px">
-   <img src="./images/front_view.png" width="200px">
+   <img src="./images/front_view.jpeg" height="250px">
+   <img src="./images/lateral_view.jpeg" height="250px">
+   <img src="./images/back_view.jpeg" height="250">
 </p>
 
 ## Functionality
@@ -57,6 +57,7 @@ The project's source code is meticulously organized into logical components and 
 |   │   └── spider_sense_HD.h     # Hardware dependent library header file
 |   |   └── vib_button_test.ino   # Test code
 |   └── library_test.cpp          # Hardware independent library test code
+└── images                        # Holds the images needed for the Readme.md file
 ├── .gitignore
 ├── LICENSE
 ├── README.md
