@@ -67,16 +67,19 @@ The project's source code is meticulously organized into logical components and 
 7. Enjoy your newly acquired superpowers!
 
 ## User Guide
-[Provide detailed instructions on how to use the device, including button functionalities, LED indicators, etc.]
+Build and wear the Spider Sense hat. Connect the two boards to a power source and wait a few seconds for the device to boot. Then make sure there is no obstacle in front of you and click the left button, Spider Sense will calculate your height. This process will take about ten seconds and then the device will start automatically.
 
 ## Links
-- [Presentation](link-to-presentation) [Note: Insert link to your PowerPoint presentation]
-- [YouTube Video](https://youtu.be/8-n8-ijeDpo?feature=shared)
+[![Scarica la presentazione PowerPoint](https://img.shields.io/badge/PowerPoint-Download-blue?style=for-the-badge&logo=microsoft-powerpoint)](https://www.canva.com/design/DAF9aIgwgVA/w0DnBaI3MHDXlyY1cSgh3A/edit?utm_content=DAF9aIgwgVA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+[![Guarda il video](https://img.shields.io/badge/Video-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/8-n8-ijeDpo?feature=shared)
 
 
 ## Team Members
-- Adami Filippo: [Brief description of their contribution to the project]
-- Barborini Mattia: [Brief description of their contribution to the project]
-- Grisenti Matteo : [Brief description of their contribution to the project]
+The development of the device was done almost entirely in group sessions where all members were present.
+Each member worked on all aspects of the project: research, software implementation, wiring and testing.
+- Adami Filippo: Main focus on the main file and welding and wiring
+- Barborini Mattia: Main focus on the hardware independent library
+- Grisenti Matteo : Main focus on the hardware dependent library 
 
 
