@@ -2,6 +2,12 @@
 
 This project leverages an embedded system device based on the MSP432P401R Launchpad microcontroller board. The device seamlessly integrates 7 VL53L0X Time-of-Flight (ToF) sensors, connected via I2C, along with 6 5V vibration motors, and 1 piezobuzzer. Designed to be mounted on a cap, the device's architecture includes the board atop, the piezobuzzer positioned at the front, and vibration motors evenly distributed along the cap's inner circumference. Furthermore, 6 lidars are strategically placed over the vibration buttons, while one lidar faces downwards at the front of the hat.
 
+<p align="center">
+   <img src="./images/lateral_view.png" width="500px">
+   <img src="./images/back_view.png" width="400px">
+   <img src="./images/front_view.png" width="200px">
+</p>
+
 ## Functionality
 The device operates with the following functionalities:
 1. Initialization involves setting up the lidar addresses.
@@ -67,17 +73,31 @@ The project's source code is meticulously organized into logical components and 
 7. Enjoy your newly acquired superpowers!
 
 ## User Guide
-Build and wear the Spider Sense hat. Connect the two boards to a power source and wait a few seconds for the device to boot. Then make sure there is no obstacle in front of you and click the left button, Spider Sense will calculate your height. This process will take about ten seconds and then the device will start automatically.
+1) Assemble and wear the Spider Sense cap.
+2) Connect the two boards to a power source and wait a few seconds for the device to boot.
+3) Make sure to not have any obstacle in front of the lider which is pointing donwards, click the left button and stay still, Spider Sense will take about ten seconds to calculate your height.
+4) After ten seconds, you can start to move around freely.
+5) Focus on the feedback you get from the vibration motor when you get close to a wall or a big obstacle, you should be able to distinguish 4 levels of vibration:
+     - Critical: the obstacle is closer than 50cm;
+     - Strong:   the obstacle is between 50cm  and 100cm;
+     - Normal:   the obstacle is between 100cm and 150cm;
+     - Light:    the obstacle is betwwen 150cm and 200cm;
+6) Now try approaching holes, steps and tables to understand the different signals emitted by the beeper.
+7) Now that you're all set up you can use the system to be able to move around freely in low visibility (or no visibility) contitions without getting hurt.
+Quick tip: moving your head allows you to detect the presence of low obstacles and holes all around you!
+
+PS: The system needs some time to sense the enviroment, thus you should not move to fast.
 
 ## Links
-[![Scarica la presentazione PowerPoint](https://img.shields.io/badge/PowerPoint-Download-blue?style=for-the-badge&logo=microsoft-powerpoint)](https://www.canva.com/design/DAF9aIgwgVA/w0DnBaI3MHDXlyY1cSgh3A/edit?utm_content=DAF9aIgwgVA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[![Canva presentation](https://img.shields.io/badge/PowerPoint-Download-blue?style=for-the-badge&logo=microsoft-powerpoint)](https://www.canva.com/design/DAF9aIgwgVA/w0DnBaI3MHDXlyY1cSgh3A/edit?utm_content=DAF9aIgwgVA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-[![Guarda il video](https://img.shields.io/badge/Video-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/8-n8-ijeDpo?feature=shared)
+[![You Tube Video](https://img.shields.io/badge/Video-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/8-n8-ijeDpo?feature=shared)
 
 
 ## Team Members
 The development of the device was done almost entirely in group sessions where all members were present.
-Each member worked on all aspects of the project: research, software implementation, wiring and testing.
+Everyone worked on all aspects of the project together: research, software implementation, wiring and testing.
+Although the work was distributed evenly, we can define some areas in which each component had a more significant contribution:
 - Adami Filippo: Main focus on the main file and welding and wiring
 - Barborini Mattia: Main focus on the hardware independent library
 - Grisenti Matteo : Main focus on the hardware dependent library 
