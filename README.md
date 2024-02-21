@@ -42,15 +42,18 @@ The project's source code is meticulously organized into logical components and 
 │   ├── spider_sense_HD.cpp       # Hardware dependent library implementation code
 │   └── spider_sense_HD.h         # Hardware dependent library header file
 └── test
-    ├── lidar_test                # Hardare dependent code to test the lidars
-    |   └── lidar_test.ino        # Test code
-    ├── vib_button_test           # Hardare dependent code to test the vibration buttons and the piezobuzzer
-    │   ├── spider_sense.cpp      # Hardware independent library implementation code
-    │   ├── spider_sense.h        # Hardware independent library header file
-    │   ├── spider_sense_HD.cpp   # Hardware dependent library implementation code
-    │   └── spider_sense_HD.h     # Hardware dependent library header file
-    |   └── vib_button_test.ino   # Test code
-    └── library_test.cpp          # Hardware independent library test code
+|   ├── lidar_test                # Hardare dependent code to test the lidars
+|   |   └── lidar_test.ino        # Test code
+|   ├── vib_button_test           # Hardare dependent code to test the vibration buttons and the piezobuzzer
+|   │   ├── spider_sense.cpp      # Hardware independent library implementation code
+|   │   ├── spider_sense.h        # Hardware independent library header file
+|   │   ├── spider_sense_HD.cpp   # Hardware dependent library implementation code
+|   │   └── spider_sense_HD.h     # Hardware dependent library header file
+|   |   └── vib_button_test.ino   # Test code
+|   └── library_test.cpp          # Hardware independent library test code
+├── .gitignore
+├── LICENSE
+├── README.md
 
 ```
 
